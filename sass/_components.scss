@@ -12,6 +12,12 @@
   align-items: center;
   justify-content: center;
   flex: 0 0 40%;
+
+  @media only screen and (max-width: $bp-smallest) {
+    order: 1;
+    flex: 0 0 100%;
+    background-color: var(--color-grey-light-2);
+  }
   &__input {
     font-family: inherit;
     font-size: inherit;
@@ -132,6 +138,10 @@
 
     &:not(:last-child) {
       margin-bottom: 0.54rem;
+
+      @media only screen and (max-width: $bp-medium) {
+        margin-bottom: 0;
+      }
     }
 
     &:before {
@@ -156,6 +166,10 @@
     &:active::before {
       background-color: var(--color-primary-light);
     }
+
+    @media only screen and (max-width: $bp-medium) {
+      flex: 1;
+    }
   }
 
   &__link:link,
@@ -169,6 +183,16 @@
     align-items: center;
     position: relative;
     z-index: 10; //only works if the position is defined
+
+    @media only screen and (max-width: $bp-medium) {
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      flex-direction: column;
+      padding: 1rem;
+    }
   }
 
   &__icon {
@@ -176,9 +200,23 @@
     width: 2rem;
     fill: currentColor; //the color of the parent
     margin-right: 2rem;
+
+    @media only screen and (max-width: $bp-small) {
+      margin-right: 0rem;
+      margin-bottom: 1rem;
+      height: 1.5rem;
+      width: 1.5rem;
+    }
   }
 
   &__text {
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
   }
 }
 
@@ -187,6 +225,10 @@
   text-align: center;
   color: var(--color-grey-light-4);
   padding: 2.5rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    display: none;
+  }
 }
 
 //GALLERY
@@ -210,6 +252,11 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 1.5rem 3rem;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.8rem;
+      padding: 1.25rem 2rem;
+    }
   }
 
   &__stars {
@@ -247,15 +294,27 @@
     align-self: stretch;
     padding: 0 2.25rem;
 
+    @media only screen and (max-width: $bp-small) {
+      padding: 0 1.5rem;
+    }
+
     &-average {
       font-size: 2.25rem;
       font-weight: 300;
-      margin-bottom: -.5rem;
+      margin-bottom: -0.5rem;
+
+      @media only screen and (max-width: $bp-small) {
+        font-size: 1.8rem;
+      }
     }
 
     &-count {
-      font-size: .8rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
+
+      @media only screen and (max-width: $bp-small) {
+        font-size: 0.5rem;
+      }
     }
   }
 }
@@ -274,8 +333,7 @@
 
   & span {
     margin-left: 3px;
-    transition: margin-left .2s;
-
+    transition: margin-left 0.2s;
   }
 
   &:hover {
@@ -283,7 +341,6 @@
 
     span {
       margin-left: 8px;
-  
     }
   }
 
@@ -311,13 +368,12 @@
 }
 
 //PARAGRAPH
-.paragraph:not(:last-of-type){
+.paragraph:not(:last-of-type) {
   margin-bottom: 2rem;
 }
 
-
 //LIST
-.list{
+.list {
   border-top: var(--line);
   border-bottom: var(--line);
   padding: 3rem 0;
@@ -327,68 +383,74 @@
   display: flex;
   flex-wrap: wrap;
 
-  &__item{
-    flex: 0 0 50%;
-    margin-bottom: .7rem;
+  @media only screen and (max-width: $bp-mini) {
+    flex-direction: column;
+  }
 
-    &::before{
+  &__item {
+    flex: 0 0 50%;
+    margin-bottom: 0.7rem;
+
+    &::before {
       content: "";
       display: inline-block;
       height: 1rem;
       width: 1rem;
-      margin-right: .7rem;
+      margin-right: 0.7rem;
 
       //older browsers->cover
-      //background-image: url(../img/chevron-thin-right.svg);
-      //background-size: cover;
+      background-image: url(../img/chevron-thin-right.svg);
+      background-size: cover;
 
       //newer browsers->masks
-      background-color: var(--color-primary);
-      -webkit-mask-image: url(../img/chevron-thin-right.svg);
-      -webkit-mask-size: cover;
-
+      @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+        background-color: var(--color-primary);
+        -webkit-mask-image: url(../img/chevron-thin-right.svg);
+        -webkit-mask-size: cover;
+        background-image: none;
+      }
     }
   }
-
-  
-
 }
 
-
 //RECOMMEND
-.recommend{
+.recommend {
   font-size: 1.3rem;
   color: var(--color-grey-dark-3);
 
   display: flex;
   align-items: center;
 
+  @media only screen and (max-width: $bp-mini) {
+    flex-direction: column;
+    align-items: start;
+  }
 
-  &__photo{
+  &__photo {
     box-sizing: content-box;
     height: 4rem;
     width: 4rem;
     border-radius: 50%;
     border: 3px solid var(--color-white);
 
-    &:not(:last-child){
-      margin-right: -1.15rem;
+    &:not(:last-child) {
+      margin-right: -2rem;
     }
   }
 
-  &__count{
+  &__count {
     margin-right: auto;
-
+    @media only screen and (max-width: $bp-mini) {
+      margin-bottom: 1rem;
+    }
   }
 
-  &__friends{
-
+  &__friends {
+    display: flex;
   }
 }
 
-
-
-.review{
+.review {
   background-color: var(--color-white);
   box-shadow: var(--shadow-light);
   padding: 3rem;
@@ -396,72 +458,141 @@
   position: relative;
   overflow: hidden;
 
-  &__text{
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__text {
     margin-bottom: 2rem;
     position: relative;
     z-index: 10;
-
-
   }
 
-  &__user{
+  &__user {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
   }
 
-  &__photo{
+  &__photo {
     height: 4.5rem;
     width: 4.5rem;
     border-radius: 50%;
     margin-right: 1rem;
-
   }
 
-  &__user{
-
-    &-box{
+  &__user {
+    &-box {
       margin-right: auto;
-
     }
 
-    &-name{
+    &-name {
       font-size: 1.1rem;
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: .4rem;
-
+      margin-bottom: 0.4rem;
     }
 
-    &-date{
+    &-date {
       font-size: 1rem;
       color: var(--color-grey-dark-3);
-
     }
-
   }
 
-  &__rating{
+  &__rating {
     font-size: 2.2rem;
     color: var(--color-primary);
-
   }
 
-  &::before{
+  &::before {
     content: "\201C";
     position: absolute;
     top: -2.75rem;
-    left: -.5rem;
+    left: -0.5rem;
     font-size: 20rem;
     line-height: 1;
     color: var(--color-grey-light-2);
     font-family: sans-serif;
     z-index: 1;
-
   }
-
-
 }
 
+//CALL TO ACTION
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
 
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2.2rem 0;
+  }
+
+  &__book-now {
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+
+    @media only screen and (max-width: $bp-mini) {
+      font-size: 1.5rem;
+      padding: 1rem;
+    }
+  }
+}
+
+.btn {
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: none;
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary-light),
+    var(--color-primary)
+  );
+  color: var(--color-white);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  & > * {
+    //select all the childs
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    transition: all 0.2s;
+  }
+
+  &__visible {
+    padding: 2rem 7.5rem;
+  }
+
+  &__invisible {
+    position: absolute;
+    left: 0;
+    top: -100%;
+    padding: 2rem 0;
+  }
+
+  &:hover {
+    background-image: linear-gradient(
+      to left,
+      var(--color-primary-light),
+      var(--color-primary)
+    );
+  }
+
+  &:hover &__visible {
+    transform: translateY(100%);
+  }
+
+  &:hover &__invisible {
+    top: 0;
+  }
+
+  &:focus {
+    outline: none;
+    animation: pulsate 1s infinite;
+  }
+}
